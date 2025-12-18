@@ -22,3 +22,11 @@ This repository contains my submission for a coding assessment. It is a full-sta
 1.  **Backend:** `cd backend && npm install && npm start` (Runs on port 5000)
 2.  **Frontend:** `cd frontend && npm install && npm start` (Runs on port 3000)
 3.  **Tests:** Run `npm test` in either directory.
+
+## Screenshots
+
+<img width="1208" height="681" alt="ItemsList" src="https://github.com/user-attachments/assets/83f91b0c-b41f-4037-a9fd-136cb274201e" />
+<img width="1388" height="681" alt="ItemsGrid" src="https://github.com/user-attachments/assets/59bd1714-a1a6-473a-aa6a-7b8c4e30249b" />
+<img width="892" height="511" alt="ItemsDetail" src="https://github.com/user-attachments/assets/9cf7aa29-db53-4a06-ac96-63d6dea925f3" />
+
+
