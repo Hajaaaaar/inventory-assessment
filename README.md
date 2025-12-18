@@ -1,58 +1,24 @@
-# Take‑Home Assessment
+# Inventory Management Challenge
 
-Welcome, candidate! This project contains **intentional issues** that mimic real‑world scenarios.
-Your task is to refactor, optimize, and fix these problems.
+This repository contains my submission for a coding assessment. It is a full-stack application designed to manage and view product inventory with a focus on performance and user experience.
 
-## Objectives
+##  Key Features
 
-### 🔧 Backend (Node.js)
+* **View Modes:** Toggle between a detailed List view and a responsive Grid view.
+* **Performance:** Implemented `react-window` for virtualization, allowing the app to render thousands of items smoothly without lagging.
+* **Smart Search:** Includes a debounced search input to minimize unnecessary API calls.
+* **URL Synchronization:** State (page, search query, view mode) is synced with the URL, so users can bookmark or share exact states.
+* **Responsive Design:** The Grid view dynamically calculates column counts based on the screen width.
 
-1. **Refactor blocking I/O**  
-   - `src/routes/items.js` uses `fs.readFileSync`. Replace with non‑blocking async operations.
+## Tech Stack
 
-2. **Performance**  
-   - `GET /api/stats` recalculates stats on every request. Cache results, watch file changes, or introduce a smarter strategy.
+* **Frontend:** React, React Router v6, React Window (Virtualization)
+* **State Management:** Context API + Custom Hooks
+* **Backend:** Node.js / Express (Mock API)
+* **Testing:** Jest & React Testing Library
 
-3. **Testing**  
-   - Add **unit tests** (Jest) for items routes (happy path + error cases).
+## How to Run
 
-### 💻 Frontend (React)
-
-1. **Memory Leak**  
-   - `Items.js` leaks memory if the component unmounts before fetch completes. Fix it.
-
-2. **Pagination & Search**  
-   - Implement paginated list with server‑side search (`q` param). Contribute to both client and server.
-
-3. **Performance**  
-   - The list can grow large. Integrate **virtualization** (e.g., `react-window`) to keep UI smooth.
-
-4. **UI/UX Polish**  
-   - Feel free to enhance styling, accessibility, and add loading/skeleton states.
-
-### 📦 What We Expect
-
-- Idiomatic, clean code with comments where necessary.
-- Solid error handling and edge‑case consideration.
-- Tests that pass via `npm test` in both frontend and backend.
-- A brief `SOLUTION.md` describing **your approach and trade‑offs**.
-
-## Quick Start
-
-node version: 18.XX
-```bash
-nvm install 18
-nvm use 18
-
-# Terminal 1
-cd backend
-npm install
-npm start
-
-# Terminal 2
-cd frontend
-npm install
-npm start
-```
-
-> The frontend proxies `/api` requests to `http://localhost:3001`.
+1.  **Backend:** `cd backend && npm install && npm start` (Runs on port 5000)
+2.  **Frontend:** `cd frontend && npm install && npm start` (Runs on port 3000)
+3.  **Tests:** Run `npm test` in either directory.
